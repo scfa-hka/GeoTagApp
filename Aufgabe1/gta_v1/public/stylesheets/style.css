@@ -110,11 +110,50 @@ a {
 /* ### TODO ### Styles for Header Component */
 
 /* ... your code here ... */
+.header {
+  width: 100%;
+  background-color: rgb(123, 173, 123);
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
 
+.header__image{
+  width: 50%;
+  display: flexbox;
+}
+
+.header__title {
+  width: 50%;
+  display: flexbox  ;
+}
+
+.header__navigation {
+  width: 50%;
+  display: flexbox  ;
+}
 
 /* ### TODO ### Styles for Main Component */
 
 /* ... your code here ... */
+
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex: 2;
+}
+
+.main__tagging {
+  width: calc(50% - 1rem);
+  display: flexbox;
+}
+
+.main__discovery {
+  width: calc(50% - 1rem);
+  display: flexbox;
+}
 
 
 /* ### TODO ### Styles for Tagging component */
