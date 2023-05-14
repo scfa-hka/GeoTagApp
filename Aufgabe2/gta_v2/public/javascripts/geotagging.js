@@ -104,7 +104,17 @@ class MapManager {
  */
 // ... your code here ...
 
+function updateLocation(LocationHelper) {
+    $('#latitude').val(LocationHelper.latitude);
+    $('#longitude').val(LocationHelper.longitude);    
+    $('#current_latitude').val(LocationHelper.latitude);
+    $('#current_longitude').val(LocationHelper.longitude);
+    var mapManager = new MapManager('W7TFkY1ZkRX48kEoxar698OIFQwiHAzq');
+    $('#mapView').attr('src', mapManager.getMapUrl(LocationHelper.latitude, LocationHelper.longitude));
+};
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
-});
+    LocationHelper.findLocation(updateLocation);
+
+}); 
