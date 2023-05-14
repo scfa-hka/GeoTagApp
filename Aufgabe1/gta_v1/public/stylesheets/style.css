@@ -185,18 +185,12 @@ a {
 
 /* ... your code here ... */
 
-#tag-form input[type="submit"] {
-  font-weight: bold;
-}
 
 /* ### TODO ### Styles for Discovery component */
 
 /* ... your code here ... */
 
 
-.discovery__search input[type="submit"]{
-  font-weight: bold;
-}
 .discovery__wrapper {
   display: flex;
 }
@@ -212,8 +206,6 @@ a {
   margin-top: 5px; 
   margin-bottom: 15px;
   padding: 15px;
-  /* 
-  margin-right: 5px; */
   background-color: #efefef;
   border: 1 px solid #ccc;
   border-radius: 5px;
@@ -226,14 +218,19 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center ;
-  font-size: medium;
 }
+
 
 /* ### TODO ### Styles for Footer Component */
 
 /* ... your code here ... */
+
 .footer {
   background-color:beige;
+  display: flex;
+  height: 100px;
+  font-size: large;
+  align-items: center;
 }
 
 /* ### TODO ### Media Queries */
@@ -264,6 +261,7 @@ a {
 
   .discovery__results{
     display: flex;
+    max-width: 150px;
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -284,6 +282,12 @@ a {
     max-width: 100%;
     height: auto;
   }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -335,11 +339,11 @@ a {
       max-width: 100%;
       height: auto;
     }
-    /* .footer {
+    .footer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      } */
+      }
   }
 
   @media screen and (max-width: 1280px) {  
@@ -349,7 +353,7 @@ a {
       }
       
       .header__image {
-      max-width: 25%;
+      max-width: 15%;
       margin: 1rem auto;
       }
       
@@ -390,7 +394,6 @@ a {
     .discovery__map {
       max-width: 100%;
       height: auto;
-      /* align-items: center; */
 
     }
     .footer {
@@ -399,10 +402,9 @@ a {
       flex-direction: column;
       }
   }
+  
   @media screen and (max-width: 1680px) {
 
-
-
     .discovery__results{
       display: flex;
       flex-direction: column;
@@ -426,44 +428,6 @@ a {
       height: auto;
     }
   }
-  @media screen and (min-width: 1681px) {
-
-    .header {  
-      display: flex;
-      align-items: center;
-    }
-
-/* 
-
-    .discovery__results{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-  
-    .discovery__results li {
-      width: 100%;
-      padding: 1rem;
-    }
-    
-    .discovery__wrapper {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    }
-    
-    .discovery__map {
-      min-width: 100%;
-      height: auto;
-    } */
-  
-    .footer {
-      display: flex;
-      height: 100px;
-      font-size: large;
-      align-items: center;
-    }
-  }
+ 
 
 
