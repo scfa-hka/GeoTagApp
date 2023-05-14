@@ -253,11 +253,21 @@ a {
   align-items: center;
   justify-content: center;
   }
-  
+  /* fieldset {
+    display: flex;
+    align-items: center;
+  justify-content: center;
+  } */
+/* 
+  .discovery__search {
+    margin: 5%;
+  }
+   */
   .main__tagging,
   .main__discovery {
   width: 100%;
   }
+
 
   .discovery__results{
     display: flex;
@@ -402,7 +412,7 @@ a {
       flex-direction: column;
       }
   }
-  
+
   @media screen and (max-width: 1680px) {
 
     .discovery__results{
