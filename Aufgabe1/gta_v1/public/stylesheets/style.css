@@ -413,31 +413,31 @@ a {
       }
   }
 
-    @media screen and (max-width: 1680px) {
+  @media screen and (max-width: 1680px) {
 
-      .discovery__results{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-      }
-    
-      .discovery__results li {
-        width: 100%;
-        padding: 1rem;
-      }
-      
-      .discovery__wrapper {
+    .discovery__results{
+      display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      }
-      
-      .discovery__map {
-        min-width: 100%;
-        height: auto;
-      }
+      width: 100%;
     }
   
+    .discovery__results li {
+      width: 100%;
+      padding: 1rem;
+    }
+    
+    .discovery__wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    .discovery__map {
+      min-width: 100%;
+      height: auto;
+    }
+  }
+ 
 
 
