@@ -7,12 +7,21 @@
 console.log("The geoTagging script is going to start...");
 
 function updateLocation(LocationHelper) {
-    $('#latitude').val(LocationHelper.latitude);
-    $('#longitude').val(LocationHelper.longitude);    
-    $('#current_latitude').val(LocationHelper.latitude);
-    $('#current_longitude').val(LocationHelper.longitude);
-    var mapManager = new MapManager('W7TFkY1ZkRX48kEoxar698OIFQwiHAzq');
-    $('#mapView').attr('src', mapManager.getMapUrl(LocationHelper.latitude, LocationHelper.longitude));
+    if (
+        $('#latitude').val() === "" ||
+        $('#longitude').val() === "" ||
+        $('#hiddenLatitude').val() === "" ||
+        $('#hiddenLongitude').val() === "" ||
+        $('#mapView').attr('src').includes("images/mapview.jpg")
+        ){
+            $('#latitude').val(LocationHelper.latitude);
+            $('#longitude').val(LocationHelper.longitude);    
+            $('#hiddenLatitude').val(LocationHelper.latitude);
+            $('#hiddenLaongitude').val(LocationHelper.longitude);
+            const mapManager = new MapManager('W7TFkY1ZkRX48kEoxar698OIFQwiHAzq');
+            $('#mapView').attr('src', mapManager.getMapUrl(LocationHelper.latitude, LocationHelper.longitude, JSON.parse($('#mapView').attr('dataset').tags)));
+        }
+
 };
 
 // Wait for the page to fully load its DOM content, then call updateLocation

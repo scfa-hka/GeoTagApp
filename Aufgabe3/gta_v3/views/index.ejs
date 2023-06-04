@@ -34,13 +34,13 @@
                             <legend>Add a new GeoTag</legend>
                             <div id="tag-form-input-elements">
                                 <label for="latitude">Latitude:</label>
-                                <input type="text" id="latitude" placeholder="49.01379" required pattern="^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})?$">
+                                <input type="text" id="latitude" name="latitude" placeholder="49.01379" required value="<%= latitude %>" pattern="^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})?$">
                                 <label for="latitude">Longitude:</label>
-                                <input type="text" id="longitude" placeholder="8.404435" required pattern="^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})?$">
+                                <input type="text" id="longitude" name="longitude" placeholder="8.404435" required value="<%= longitude %>" pattern="^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})?$">
                                 <label for="name">Name:</label>
-                                <input type="text" id="name" placeholder="e. g. Berlin" required pattern=".{3,10}">
+                                <input type="text" id="name" name="name" placeholder="e. g. Berlin" required pattern=".{3,10}">
                                 <label for="Hashtag">Hashtag:</label>
-                                <input type="text" id="Hashtag" placeholder="e. g. #ber" pattern="#.{1,9}">
+                                <input type="text" id="Hashtag" name="hashtag" placeholder="e. g. #ber" pattern="#.{1,9}">
                                 <input type="submit" name="submit" id="send_geo_tag" value="add GeoTag">
                             </div>
                         </fieldset>
@@ -58,9 +58,9 @@
                         <fieldset>
                             <legend>Search</legend>
                             <label for="searchterm">Search term or keywords:</label>
-                            <input type="text" id="searchterm" placeholder="e. g. Berlin">
-                            <input type="hidden" id="current_latitude">
-                            <input type="hidden" id="current_longitude">
+                            <input type="text" id="searchterm" name="searchterm" placeholder="e. g. Berlin">
+                            <input type="hidden" id="hiddenLatitude" name="hiddenLatitude" value="<%= latitude %>">
+                            <input type="hidden" id="hiddenLongitude" name="hiddenLongitude" value="<%= longitude %>">
                             <input type="submit" id="search_geo_tag" value="search">
                         </fieldset>
                     </form>
@@ -77,7 +77,7 @@
                                 </ul>
                             </div>
                         <div class="discovery__map col-9">
-                            <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                            <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" data-tags="<%= JSON.stringify(taglist) %>"/>
                             <span>Result map</span>
                         </div>
                     </div>
