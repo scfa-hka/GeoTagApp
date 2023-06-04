@@ -20,16 +20,14 @@ html {
   box-sizing: inherit;
 }
 
-
 /* Variables (example: see declaration for "a" below) */
 
 :root {
-  --link-color: #00B7FF;
+  --link-color: #00b7ff;
   --background-color: #efefef;
   --border-color: #cdcdcd;
   --gray-color: #666;
 }
-
 
 /* HTML element styles */
 
@@ -46,8 +44,45 @@ a {
 
 /* ### TODO ### Styles for other HTML elements */
 
-/* ... your code here ... */
+input {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0.5rem;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
 
+fieldset {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+
+button {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0.5rem;
+  display: block;
+}
+
+span {
+  display: block;
+}
+
+form {
+  width: 100%;
+}
+
+ul > li {
+  font-size: medium;
+  margin-bottom: 0.5rem;
+  list-style: none;
+  padding: 1rem;
+  background-color: var(--background-color);
+  color: var(--link-color);
+  border: 1px solid var(--border-color);
+}
 
 /* Grid styles (no changes required) */
 
@@ -106,338 +141,75 @@ a {
   width: calc(100% - 1rem);
 }
 
-
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
-.header {  
-  background-color:beige;
-}
-
-.header__image {
+header {
+  background-color: var(--background-color);
+  padding: 3rem;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  max-width: 5%;
-  margin: 0 auto;
-}
-
-.header__title {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-}
-
-.header__navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: larger ;
 }
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
-
-.main__tagging, .main__discovery {
-  margin: 30px;
+main {
+  padding: 3rem;
+  flex: 1; /* This is the key to make the footer stick to the bottom */
 }
-
-.main input {
-  padding: 10px;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.main input[type="submit"] {
-  display: block;
-  margin-top: 15px;
-  background-color: #efefef;
-  font-weight: bold;
-}
-
-.main fieldset {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 20px;
-}
-
-.main legend {
-  font-size: large;
-  font-weight: bold;
-}
-
-.main label {
-  display: block;
-  margin-top: 10px;
-  font-size: medium;
-}
-
-.main h2 {
-  font-size: x-large;
-  font-weight: bold;
-} 
-
-/* ### TODO ### Styles for Tagging component */
-
-/* ... your code here ... */
-
 
 /* ### TODO ### Styles for Discovery component */
-
-/* ... your code here ... */
-
+.main__discovery {
+  width: 100%;
+}
 
 .discovery__wrapper {
-  display: flex;
+  margin-top: 0.5rem;
 }
-
-
-.discovery__results{
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-}
-.discovery__results li {
-  min-width: 300px;
-  margin-top: 5px; 
-  margin-bottom: 15px;
-  padding: 15px;
-  background-color: #efefef;
-  border: 1 px solid #ccc;
-  border-radius: 5px;
-  list-style-type: none;
-  font-size: medium; 
-}
-
-.discovery__map {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center ;
-}
-
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
-
-.footer {
-  background-color:beige;
+footer {
+  background-color: var(--background-color);
+  padding: 3rem;
+  border-top: 1px solid var(--border-color);
   display: flex;
-  height: 100px;
-  font-size: large;
-  align-items: center;
+  justify-content: left;
 }
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
-@media screen and (max-width: 480px) {
-  .header {
-  flex-direction: column;
-  align-items: center;
-  }
-  
-  .header__image {
-  max-width: 50%;
-  margin: 1rem auto;
-  }
-  
-  .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  }
-  fieldset {
-    display: flex;
-    align-items: center;
-  justify-content: center;
-  }
- 
-  .discovery__search {
-    margin: 5%;
-  }
-
-  .main__tagging,
-  .main__discovery {
-  width: 100%;
-  }
-
-
-  .discovery__results{
-    display: flex;
-    max-width: 150px;
+@media (max-width: 1200px) {
+  .row {
     flex-direction: column;
-    align-items: center;
-    width: 100%;
   }
 
-  .discovery__results li {
-    width: 100%;
-    padding: 1rem;
-  }
-  
-  .discovery__wrapper {
+  header {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
-  
+
   .discovery__map {
-    max-width: 100%;
     height: auto;
+    width: 100%;
   }
 
-  .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
+  .discovery__map > img {
+    width: 100%;
+  }
+
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9,
+  .col-10,
+  .col-11,
+  .col-12 {
+    width: 100%;
+  }
 }
-
-@media screen and (max-width: 768px) {
-    .header {
-    flex-direction: column;
-    align-items: center;
-    }
-    
-    .header__image {
-    max-width: 50%;
-    margin: 1rem auto;
-    }
-    
-    .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    }
-    
-    .main__tagging,
-    .main__discovery {
-    width: 100%;
-    }
-
-    .discovery__results{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-  
-    .discovery__results li {
-      width: 100%;
-      padding: 1rem;
-    }
-    
-    .discovery__wrapper {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      
-    }
-    .discovery__wrapper span {
-      justify-content: center;
-      align-items: center;
-    }
-    .discovery__map {
-      max-width: 100%;
-      height: auto;
-    }
-    .footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      }
-  }
-
-  @media screen and (max-width: 1280px) {  
-    .header {
-      flex-direction: column;
-      align-items: center;
-      }
-      
-      .header__image {
-      max-width: 15%;
-      margin: 1rem auto;
-      }
-      
-    .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    }
-    
-    .main__tagging,
-    .main__discovery {
-    width: 100%;
-    }
-
-    .discovery__results{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-  
-    .discovery__results li {
-      width: 100%;
-      padding: 1rem;
-    }
-    
-    .discovery__wrapper {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .discovery__wrapper span {
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .discovery__map {
-      max-width: 100%;
-      height: auto;
-
-    }
-    .footer {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      }
-  }
-
-  @media screen and (max-width: 1680px) {
-
-    .discovery__results{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-  
-    .discovery__results li {
-      width: 100%;
-      padding: 1rem;
-    }
-    
-    .discovery__wrapper {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    }
-    
-    .discovery__map {
-      min-width: 100%;
-      height: auto;
-    }
-  }
- 
-
-

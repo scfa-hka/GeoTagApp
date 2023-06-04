@@ -1,96 +1,141 @@
+<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
 <!DOCTYPE html>
 
 <!-- File origin: VS1LAB A1a -->
 
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GeoTagApp</title>
     <link rel="stylesheet" href="./stylesheets/style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<body>
-        <header class="header row">
-                <img src="./images/location.png" class="header__image col-4" alt="an image of a map and location">
-                <h1 class="header__title col-4">GeoTagApp</h1>
-                <nav class="header__navigation col-4">
-                    <a href="#">About</a> | <a href="#">Help</a> | <a href="/">home</a>
-                </nav>
-        </header>
-        <main class="main row">
-                <section class="main__tagging tagging col-3">
-                    <h2 class = "tagging__title">Tagging</h2>
+  <body>
+    <header class="header">
+      <img
+        src="./images/location.png"
+        class="header__image"
+        width="50"
+        height="50"
+        alt="an image of a map and location"
+      />
+      <h1 class="header__title">GeoTagApp</h1>
+      <nav class="header__navigation">
+        <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
+      </nav>
+    </header>
 
-                    <!-- ############### VS1Lab 1a Form 1 Start -->
-                    <form id="tag-form" action="/tagging" method="post">
+    <main class="main">
+      <container>
+        <div class="row">
+          <div class="col-2">
+            <section class="main__tagging tagging">
+              <h2>Tagging</h2>
 
-                        <!-- ... your code here ... -->
-                        <fieldset>
-                            <legend>Add a new GeoTag</legend>
-                            <div id="tag-form-input-elements">
-                                <label for="latitude">Latitude:</label>
-                                <input type="text" id="latitude" name="latitude" placeholder="49.01379" required value="<%= latitude %>" pattern="^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})?$">
-                                <label for="latitude">Longitude:</label>
-                                <input type="text" id="longitude" name="longitude" placeholder="8.404435" required value="<%= longitude %>" pattern="^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})?$">
-                                <label for="name">Name:</label>
-                                <input type="text" id="name" name="name" placeholder="e. g. Berlin" required pattern=".{3,10}">
-                                <label for="Hashtag">Hashtag:</label>
-                                <input type="text" id="Hashtag" name="hashtag" placeholder="e. g. #ber" pattern="#.{1,9}">
-                                <input type="submit" name="submit" id="send_geo_tag" value="add GeoTag">
-                            </div>
-                        </fieldset>
-                    </form>
-                    <!-- ############### VS1Lab 1a Form 1 End -->
-
-                </section>
-                <section class="main__discovery discovery col-9">
-                    <h2 class="discovery__title">Discovery</h2>
-
-                    <!-- ############### VS1Lab 1a Form 2 Start -->
-                    <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
-
-                        <!-- ... your code here ... -->
-                        <fieldset>
-                            <legend>Search</legend>
-                            <label for="searchterm">Search term or keywords:</label>
-                            <input type="text" id="searchterm" name="searchterm" placeholder="e. g. Berlin">
-                            <input type="hidden" id="hiddenLatitude" name="hiddenLatitude" value="<%= latitude %>">
-                            <input type="hidden" id="hiddenLongitude" name="hiddenLongitude" value="<%= longitude %>">
-                            <input type="submit" id="search_geo_tag" value="search">
-                        </fieldset>
-                    </form>
-                    <!-- ############### VS1Lab 1a Form 2 End -->
-                        <div class="discovery__wrapper row">
-                            <div class="discovery__taglist col-3">
-                                <ul class="discovery__results" id="discoveryResults">
-                                    
-<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
-                                    <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-                                        <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
-                                    <% }); %>
-
-                                </ul>
-                            </div>
-                        <div class="discovery__map col-9">
-                            <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" data-tags="<%= JSON.stringify(taglist) %>"/>
-                            <span>Result map</span>
-                        </div>
+              <!-- ############### VS1Lab 1a Form 1 Start -->
+              <form id="tag-form" action="/tagging" method="post">
+                <fieldset>
+                  <legend>Add a new GeoTag</legend>
+                  <label for="latitude">Latitude:</label>
+                  <input type="text" id="latitude" name="latitude" readonly value="<%= latitude %>"/>
+                  <label for="longitude">Longitude:</label>
+                  <input type="text" id="longitude" name="longitude" readonly value="<%= longitude %>"/>
+                  <label for="name">Name:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    maxlength="10"
+                    placeholder="e.g. Central Berlin"
+                  />
+                  <label for="hashtag">Hashtag:</label>
+                  <input
+                    type="text"
+                    id="hashtag"
+                    name="hashtag"
+                    pattern="#.+"
+                    maxlength="11"
+                    placeholder="e.g. #ber"
+                  />
+                  <input type="submit" value="Add tag" />
+                </fieldset>
+              </form>
+              <!-- ############### VS1Lab 1a Form 1 End -->
+            </section>
+          </div>
+          <div class="col-10">
+            <section class="main__discovery discovery">
+              <h2 class="discovery__title">Discovery</h2>
+              <div class="row">
+                <!-- ############### VS1Lab 1a Form 2 Start -->
+                <form
+                  class="discovery__search"
+                  id="discoveryFilterForm"
+                  action="/discovery"
+                  method="post"
+                >
+                  <fieldset>
+                    <legend>Search</legend>
+                    <label for="latitude">Search term or keywords:</label>
+                    <input
+                      type="text"
+                      id="searchterm"
+                      name="searchterm"
+                      placeholder="e.g. Berlin"
+                    />
+                    <input
+                      type="hidden"
+                      id="hiddenLatitude"
+                      name="hiddenLatitude"
+                      value="<%= latitude %>"
+                    />
+                    <input
+                      type="hidden"
+                      id="hiddenLongitude"
+                      name="hiddenLongitude"
+                      value="<%= longitude %>"
+                    />
+                    <input type="submit" value="Search" />
+                  </fieldset>
+                </form>
+                <!-- ############### VS1Lab 1a Form 2 End -->
+              </div>
+              <div class="row discovery__wrapper">
+                <div class="col-4 discovery__taglist">
+                    <ul class="discovery__results" id="discoveryResults">
+                        <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
+                            <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
+                        <% }); %>
+                    </ul>
+                </div>
+                <div class="col-8">
+                    <div class="discovery__map">
+                      <img
+                        src="./images/mapview.jpg"
+                        data-tags="<%= JSON.stringify(taglist) %>"
+                        alt="a map with locations"
+                        id="mapView"
+                      />
+                      <span>Result map</span>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </container>
+    </main>
 
-                </section>
-        </main>
-    </div>
     <footer class="footer">
-        <span>(c) 2021/22 HKA_IWI_VSYS</span>
+      <span>(c) 2021/22 HKA_IWI_VSYS</span>
     </footer>
     <script src="./javascripts/location-helper.js"></script>
     <script src="./javascripts/map-manager.js"></script>
     <script src="./javascripts/geotagging.js"></script>
-</body>
-
+  </body>
 </html>
+
