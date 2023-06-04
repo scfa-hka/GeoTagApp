@@ -28,8 +28,10 @@ const GeoTag = require('../models/geotag');
  * 
  * TODO: implement the module in the file "../models/geotag-store.js"
  */
+
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
+const GeoTag = require('../models/geotag');
 
 /**
  * Route '/' for HTTP 'GET' requests.
@@ -61,6 +63,12 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/tagging', (req, res) => {
+    const { name, hashtag, latitude, longitude } = req.body;
+    const geotag = new GeoTag(longitude, latitude, name, hashtag);  
+    res.render('index', taglist = { latitude: '', longitude: '', name: '', hashtag: '' })
+    
+});
 
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -79,5 +87,8 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/discovery', (req, res) => {
+  res.send({ searchterm: '', current_latitude: '', current_longitude: '' })
+});
 
 module.exports = router;
