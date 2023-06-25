@@ -27,6 +27,12 @@ const GeoTag = require('../models/geotag');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const store = new GeoTagStore();
+GeoTagExamples.tagList.forEach(([name, latitude, longitude, hashtag]) =>
+  store.addGeoTag(new GeoTag(latitude, longitude, name, hashtag))
+);
+const DEFAULT_RADIUS = 0.1;
+
 // App routes (A3)
 
 /**
@@ -38,8 +44,43 @@ const GeoTagStore = require('../models/geotag-store');
  * As response, the ejs-template is rendered without geotag objects.
  */
 
-router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+router.get("/", (req, res) => {
+  res.render("index", { taglist: [], latitude: "", longitude: "" });
+});
+
+router.post("/tagging", (req, res) => {
+  const { name, hashtag, latitude, longitude } = req.body;
+  store.addGeoTag(new GeoTag(latitude, longitude, name, hashtag));
+  const tags = store.getNearbyGeoTags(latitude, longitude, DEFAULT_RADIUS);
+  res.render("index", {
+    taglist: tags,
+    latitude: latitude,
+    longitude: longitude,
+  });
+});
+
+router.post("/discovery", (req, res) => {
+  const { searchterm, hiddenLatitude, hiddenLongitude } = req.body;
+  let tags = [];
+  if (searchterm) {
+    tags = store.searchNearbyGeoTags(
+      hiddenLatitude,
+      hiddenLongitude,
+      DEFAULT_RADIUS,
+      searchterm
+    );
+  } else {
+    tags = store.getNearbyGeoTags(
+      hiddenLatitude,
+      hiddenLongitude,
+      DEFAULT_RADIUS
+    );
+  }
+  return res.render("index", {
+    taglist: tags,
+    latitude: hiddenLatitude,
+    longitude: hiddenLongitude,
+  });
 });
 
 // API routes (A4)
