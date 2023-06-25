@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(requestData),
         });
         if (response.ok) {
-          const geotag = await response.json();
+          //const geotag = await response.json();
           await updatePageContent();
           document.getElementById("name").value = "";
           document.getElementById("hashtag").value = "";
