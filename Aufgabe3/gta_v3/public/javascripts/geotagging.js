@@ -15,7 +15,7 @@ console.log("The geoTagging script is going to start...");
  * It is called once the page has been fully loaded.
  */
 function updateLocation() {
-  const mapManager = new MapManager("wCJTfvQc4B3JNmqRvKm9cemnYAKk59Ha");
+  const mapManager = new MapManager("W7TFkY1ZkRX48kEoxar698OIFQwiHAzq");
   const latitudeElement = document.getElementById("latitude");
   const longitudeElement = document.getElementById("longitude");
   const hiddenLatitudeElement = document.getElementById("hiddenLatitude");
