@@ -49,6 +49,26 @@ function updateLocation() {
   }
 }
 
+/** 
+ * falls data = undefined -> erste if-Anweisung
+ *    Daten werden ggf. einzeln via JQuery extrahiert (Searchterm, hiddenLatitude/-Longitude)
+ *    Server anfetchen mit erstellten Query-Parametern
+ *    in Variable "data" JSON-Daten der Antwort speichern
+ *    wegen await müssen diese Prozesse erst abgeschlossen sein, bevor es weiter geht
+ * 
+ * Seitenanzahl (pageCount) aus data auslesen und Variable zuweisen
+ * aus dem html-Doc über JQuery 
+ *    hiddenLatitude/-Longitude Werte auslesen + speichern
+ *    mapView Zugriff speichern
+ *    Liste Zugriff speichern
+ * einmal alle Listen-Elemente löschen
+ * data.records einzeln auslesen und Liste wieder mit Elementen füllen -> appendChild(li)
+ * 
+ * updatePagination mit data als Parameter -> erstellt die Seiten-Navigation
+ * 
+ * dann Karte updaten mit data.records als taglist
+ *  
+*/
 async function updatePageContent(tagsResponse = undefined) {
   console.log("updatePageContent", tagsResponse);
   const mapManager = new MapManager(MAP_QUEST_API_KEY);
@@ -71,9 +91,9 @@ async function updatePageContent(tagsResponse = undefined) {
   const mapViewElement = document.getElementById("mapView");
   const hiddenLatitude = document.getElementById("hiddenLatitude").value;
   const hiddenLongitude = document.getElementById("hiddenLongitude").value;
-
   const discoveryResultsElement = document.getElementById("discoveryResults");
   discoveryResultsElement.innerHTML = ""; // clear all li elements
+  
   data.records.forEach(({ name, latitude, longitude, hashtag }) => {
     const li = document.createElement("li");
     li.innerHTML = `${name} (${latitude}, ${longitude}) ${hashtag}`;
@@ -89,7 +109,9 @@ async function updatePageContent(tagsResponse = undefined) {
   );
   mapViewElement.src = mapUrl;
 }
-
+/**
+ * falls in data.records Daten vorhanden sind, werden die entsprechenden HTML-Tags angezeigt, sonst nicht
+ */
 const updatePagination = (data) => {
   if (data.records.length > 0) {
     console.log("updatePagination", data);
@@ -151,6 +173,18 @@ document.addEventListener("DOMContentLoaded", () => {
   updateLocation();
   initPagination();
 
+  /**
+   * JQuery-Zugriff -> GeoTag-Formular
+   * Eventlistener -> Submit
+   * Default-Prozedere verhindern -> preventDefault
+   * Daten des Formulars extrahieren -> requestData
+   * Daten überprüfen -> checkValidity
+   * Seite, Seitenanzahl, Suchbegriff festlegen -> Defaultwerte = 1, 1, "" 
+   * Server anfetchen und Rückmeldung abwarten -> await
+   * Antwort mit JSON im Body -> const response -> clientseitig werden Daten dann verarbeitet
+   * falls response ok -> updatePageContent + name = hashtag = ""
+   * sonst -> error
+   */
   document
     .getElementById("tag-form")
     .addEventListener("submit", async (event) => {
@@ -175,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(requestData),
         });
         if (response.ok) {
+          //was passiert mit geotag?
           const geotag = await response.json();
           await updatePageContent();
           document.getElementById("name").value = "";
@@ -186,6 +221,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return false;
     });
+
+    /** 
+     * JQuery-Zugriff -> Discovery-Formular
+     * Eventlistener -> Submit
+     * Default-Prozedere verhindern -> preventDefault
+     * Daten des Formulars extrahieren -> requestData
+     * Daten überprüfen -> checkValidity
+     * 
+     * Variable mit quereyParameter wird dabei erstellt
+     * 
+     * Seite, Seitenanzahl festlegen -> Defaultwerte = 1, 1
+     * 
+     * ggf. hiddenLatitude/-Longitude und Searchterm an queryParameters anhängen
+     * 
+     * dann Server anfetchen, Antwort abwarten -> await
+     * 
+     * falls response.ok -> Seiteninhalte updaten 
+     * sonst -> error
+     * 
+     */
   document
     .getElementById("discoveryFilterForm")
     .addEventListener("submit", async (event) => {
